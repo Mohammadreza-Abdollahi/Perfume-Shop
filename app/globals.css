@@ -1,10 +1,33 @@
 @import "tailwindcss";
-
+@font-face {
+  font-family: lalezar;
+  src: url('/fonts/Lalezar-Regular.ttf');
+}
+@font-face {
+  font-family: dana;
+  src: url('/fonts/Dana-FaNum-Medium.ttf');
+}
+@font-face {
+  font-family: dana-bold;
+  src: url('/fonts/Dana-FaNum-Bold.ttf');
+}
+.lalezar{
+  font-family: lalezar !important;
+}
+.dana-bold{
+  font-family: dana-bold !important;
+}
+*{
+  font-family: dana;
+}
+*::selection{
+  background-color: #ec5238;
+  color: white !important;
+}
 @theme {
-  --color-first: #ffcf0f;
-  --color-first-1: #efb603;
-  --color-first-2: #ffe343;
-  --color-second: #6c757d;
-  --color-second-1: #4d5961;
-  --color-second-2: #9ea6ad;
+  --color-first: #ec5238;
+  --color-first-1: #F28C7A;
+  --color-first-3: #F6B2A6;
+  --color-first-2: #F9C5BD;
+  --color-first-4: #FBD9D3;
 }

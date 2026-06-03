@@ -1,8 +1,13 @@
+import Welcome from "@/components/landing/Welcome";
+import TopBanner from "../../components/landing/TopBanner";
+
 const LandingPage = () => {
-  return <>
-    <h1>سلااااام</h1>
-    <h1 className="text-first">اینجا لندینگ پیجهههههه</h1>
-  </>;
+  return (
+    <>
+      <TopBanner />
+      <Welcome/>
+    </>
+  );
 };
 
 export default LandingPage;

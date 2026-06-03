@@ -1,8 +1,10 @@
+import Header from "../../components/layout/Header";
+
 const LandingPageLayout = ({ children }) => {
   return (
     <>
       <section>
-        <header></header>
+        <Header />
         <main>{children}</main>
         <footer></footer>
       </section>
