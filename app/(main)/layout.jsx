@@ -1,3 +1,4 @@
+import Footer from "@/components/layout/Footer";
 import Header from "../../components/layout/Header";
 
 const LandingPageLayout = ({ children }) => {
@@ -6,7 +7,7 @@ const LandingPageLayout = ({ children }) => {
       <section>
         <Header />
         <main>{children}</main>
-        <footer></footer>
+        <Footer/>
       </section>
     </>
   );

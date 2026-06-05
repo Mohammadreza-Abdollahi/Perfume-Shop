@@ -1,6 +1,8 @@
 "use client";
 
 import { convertToPersianDigits } from "@/utils/converToPersianDigits";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -29,10 +31,10 @@ const HoverModal = ({ children }) => {
               {/* <span className="block py-2 bg-red-200 text-red-800 rounded">
                 سبد خرید خالی است.
               </span> */}
-              <div className="flex items-center py-1 px-0.5 hover:bg-first-4 rounded transition-all duration-150">
+              <div className="flex items-center py-1 px-2 hover:bg-first-4 rounded transition-all duration-150">
                 <Image
                   className="me-1"
-                  src={"/images/banner.png"}
+                  src={"/images/perf1.png"}
                   alt="Cart_Item"
                   width={50}
                   height={50}
@@ -42,12 +44,13 @@ const HoverModal = ({ children }) => {
                     شنل پلاتینیوم گرید A
                   </span>
                 </div>
+                <button><FontAwesomeIcon icon={faXmark} className="text-red-500 text-sm"/></button>
               </div>
               <div></div>
-              <div className="flex items-center py-1 px-0.5 hover:bg-first-4 rounded transition-all duration-150">
+              <div className="flex items-center py-1 px-2 hover:bg-first-4 rounded transition-all duration-150">
                 <Image
                   className="me-1"
-                  src={"/images/banner.png"}
+                  src={"/images/perf2.png"}
                   alt="Cart_Item"
                   width={50}
                   height={50}
@@ -57,6 +60,7 @@ const HoverModal = ({ children }) => {
                     شنل پلاتینیوم گرید A
                   </span>
                 </div>
+                <button><FontAwesomeIcon icon={faXmark} className="text-red-500 text-sm"/></button>
               </div>
             </div>
             <div className="w-full border-t border-slate-300">
