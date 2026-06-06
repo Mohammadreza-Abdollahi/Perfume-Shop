@@ -7,7 +7,7 @@ const Header = () => {
     <>
       <header className="container z-10 mx-auto absolute flex items-center justify-between top-7 right-1/2 translate-x-1/2">
         <div>
-          <Image src={"/images/logo.png"} alt="Logo" width={49} height={40} />
+          <Image src={"/icons/logo.png"} alt="Logo" width={49} height={40} />
         </div>
         <nav>
           <ul className="flex items-center gap-8 px-6 text-slate-700 py-3 border border-slate-500 rounded-full">
