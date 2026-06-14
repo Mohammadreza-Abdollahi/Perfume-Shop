@@ -65,7 +65,7 @@ const HoverModal = ({ children }) => {
             </div>
             <div className="w-full border-t border-slate-300">
               <span className="block py-2 text-slate-700">
-                مجموع : {convertToPersianDigits(1250000, true)} تومان
+                مجموع : <b>{convertToPersianDigits(1250000, true)} </b><Image className="inline-block" src={"/icons/tooman2.png"} alt="Tooman_Icon" width={35} height={35}/>
               </span>
               <Link href={"/cart"}>
                 <button className="block w-full py-2 bg-first hover:bg-orange-800 text-white rounded transition-all duration-150">

@@ -11,9 +11,9 @@ const TopProducts = () => {
             <p className="pe-30 text-slate-700 mt-1.5 block">ما هر هفته بهترین و پرفروش ترین محصولاتمان را به شما پیشنهاد میدهیم.</p>
         </div>
         <div className="flex-3/4 gap-8">
-            <div className="w-[290px] mx-8 inline-block">
+            <div className="w-[290px] mx-8 inline-block group">
                 <section className="flex items-center justify-center bg-linear-to-br from-first/30 to-white rounded-3xl">
-                    <Image src={"/images/perf5.png"} alt="Perf_1" width={277} height={331}/>
+                    <Image className="group-hover:scale-110 transition-all duration-150" src={"/images/perf5.png"} alt="Perf_1" width={277} height={331}/>
                 </section>
                 <section className="my-5">
                     <div className="flex justify-between items-center">
@@ -24,9 +24,9 @@ const TopProducts = () => {
                     <button className="flex items-center justify-between border border-slate-400 rounded-full mt-5 group cursor-pointer"><span className="mx-3.5">افزودن به سبد خرید</span><span className="flex items-center justify-center w-[38px] h-[38px] rounded-full bg-first group-hover:bg-orange-700 transition-all duration-150"><Image src={"/icons/cart.png"} alt="Cart-Icon" width={18} height={18}/></span></button>
                 </section>
             </div>
-            <div className="w-[290px] mx-8 inline-block">
+            <div className="w-[290px] mx-8 inline-block group">
                 <section className="flex items-center justify-center bg-linear-to-br from-first/30 to-white rounded-3xl">
-                    <Image src={"/images/perf3.png"} alt="Perf_1" width={277} height={331}/>
+                    <Image className="group-hover:scale-110 transition-all duration-150" src={"/images/perf3.png"} alt="Perf_1" width={277} height={331}/>
                 </section>
                 <section className="my-5">
                     <div className="flex justify-between items-center">
@@ -37,9 +37,9 @@ const TopProducts = () => {
                     <button className="flex items-center justify-between border border-slate-400 rounded-full mt-5 group cursor-pointer"><span className="mx-3.5">افزودن به سبد خرید</span><span className="flex items-center justify-center w-[38px] h-[38px] rounded-full bg-first group-hover:bg-orange-700 transition-all duration-150"><Image src={"/icons/cart.png"} alt="Cart-Icon" width={18} height={18}/></span></button>
                 </section>
             </div>
-            <div className="w-[290px] mx-8 inline-block">
+            <div className="w-[290px] mx-8 inline-block group">
                 <section className="flex items-center justify-center bg-linear-to-br from-first/30 to-white rounded-3xl">
-                    <Image src={"/images/perf8.png"} alt="Perf_1" width={277} height={331}/>
+                    <Image className="group-hover:scale-110 transition-all duration-150" src={"/images/perf8.png"} alt="Perf_1" width={277} height={331}/>
                 </section>
                 <section className="my-5">
                     <div className="flex justify-between items-center">
