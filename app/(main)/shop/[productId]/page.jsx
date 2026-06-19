@@ -1,17 +1,41 @@
 import { convertToPersianDigits } from "@/utils/converToPersianDigits";
-import { faBoxOpen, faCheckCircle, faSquareCheck, faTruckFast } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBoxOpen,
+  faSquareCheck,
+  faTruckFast,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
+import Link from "next/link";
 
 const SingleProduct = () => {
   return (
     <>
       <section className="container mx-auto pt-32">
-        <div className="bg-gray-100 rounded-2xl mb-5 py-3">
+        <div className="flex gap-8 bg-gray-100 rounded-2xl mb-5 px-5 py-3">
+          <Link
+            className="hover:text-first transition-all duration-150"
+            href={"/"}
+          >
+            <span>خانه</span>
+          </Link>
+          <span>\</span>
+          <Link
+            className="hover:text-first transition-all duration-150"
+            href={"/shop"}
+          >
+            فروشگاه
+          </Link>
+          <span>\</span>
+          <Link
+            className="hover:text-first transition-all duration-150"
+            href={"/shop/1"}
+          >
+            شنل پلاتینیوم
+          </Link>
           <br />
         </div>
         <div className="flex gap-6">
-          {/* محتوای اصلی */}
           <div className="w-2/3">
             <section className="flex bg-gray-100 rounded-2xl">
               <div className="flex-1/3 p-2">
@@ -44,14 +68,110 @@ const SingleProduct = () => {
                 </ul>
               </div>
             </section>
-            <section className="bg-gray-100 rounded-2xl p-2 mt-5">
+            <section className="bg-gray-100 rounded-2xl p-5 py-4 mt-5">
+              <section className="my-6">
+                <h3 className="text-xl text-slate-800 my-1">
+                  <b>معرفی:</b>
+                </h3>
+                <p className="text-justify text-slate-700">
+                  لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و
+                  با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و
+                  مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی
+                  تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای
+                  کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و
+                  آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم
+                  افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص
+                  طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد، در این
+                  صورت می توان امید داشت که تمام و دشواری موجود در ارائه
+                  راهکارها، و شرایط سخت تایپ به پایان رسد و زمان مورد نیاز شامل
+                  حروفچینی دستاوردهای اصلی، و جوابگوی سوالات پیوسته اهل دنیای
+                  موجود طراحی اساسا مورد استفاده قرار گیرد.
+                </p>
+              </section>
               <br />
-              <br />
-              <br />
-              <br />
+              <section className="my-6">
+                <h4 className="text-xl text-slate-800 my-1">
+                  <b>مشخصات:</b>
+                </h4>
+                <table className="w-3/4 mx-auto my-5">
+                  <tbody>
+                    <tr className="odd:bg-first/20 hover:bg-first/25 transition-all duration-150 cursor-default">
+                      <td className="w-1/4 px-3 py-1.5 text-slate-900 rounded-s-lg">
+                        سایز
+                      </td>
+                      <td className="w-3/4 px-3 py-1.5 text-slate-800 rounded-e-lg">
+                        100 میل
+                      </td>
+                    </tr>
+                    <tr className="odd:bg-first/20 hover:bg-first/25 transition-all duration-150 cursor-default">
+                      <td className="w-1/4 px-3 py-1.5 text-slate-900 rounded-s-lg">
+                        طبع
+                      </td>
+                      <td className="w-3/4 px-3 py-1.5 text-slate-800 rounded-e-lg">
+                        شیرین
+                      </td>
+                    </tr>
+                    <tr className="odd:bg-first/20 hover:bg-first/25 transition-all duration-150 cursor-default">
+                      <td className="w-1/4 px-3 py-1.5 text-slate-900 rounded-s-lg">
+                        گروه بویایی
+                      </td>
+                      <td className="w-3/4 px-3 py-1.5 text-slate-800 rounded-e-lg">
+                        چوبی مشک گل
+                      </td>
+                    </tr>
+                    <tr className="odd:bg-first/20 hover:bg-first/25 transition-all duration-150 cursor-default">
+                      <td className="w-1/4 px-3 py-1.5 text-slate-900 rounded-s-lg">
+                        عطار
+                      </td>
+                      <td className="w-3/4 px-3 py-1.5 text-slate-800 rounded-e-lg">
+                        ژاک پولجه
+                      </td>
+                    </tr>
+                    <tr className="odd:bg-first/20 hover:bg-first/25 transition-all duration-150 cursor-default">
+                      <td className="w-1/4 px-3 py-1.5 text-slate-900 rounded-s-lg">
+                        جنسیت
+                      </td>
+                      <td className="w-3/4 px-3 py-1.5 text-slate-800 rounded-e-lg">
+                        مردانه
+                      </td>
+                    </tr>
+                    <tr className="odd:bg-first/20 hover:bg-first/25 transition-all duration-150 cursor-default">
+                      <td className="w-1/4 px-3 py-1.5 text-slate-900 rounded-s-lg">
+                        نوع عطر
+                      </td>
+                      <td className="w-3/4 px-3 py-1.5 text-slate-800 rounded-e-lg">
+                        ادو تویلت
+                      </td>
+                    </tr>
+                    <tr className="odd:bg-first/20 hover:bg-first/25 transition-all duration-150 cursor-default">
+                      <td className="w-1/4 px-3 py-1.5 text-slate-900 rounded-s-lg">
+                        فصل
+                      </td>
+                      <td className="w-3/4 px-3 py-1.5 text-slate-800 rounded-e-lg">
+                        فصول گرم
+                      </td>
+                    </tr>
+                    <tr className="odd:bg-first/20 hover:bg-first/25 transition-all duration-150 cursor-default">
+                      <td className="w-1/4 px-3 py-1.5 text-slate-900 rounded-s-lg">
+                        ماندگاری
+                      </td>
+                      <td className="w-3/4 px-3 py-1.5 text-slate-800 rounded-e-lg">
+                        بسیار خوب
+                      </td>
+                    </tr>
+                    <tr className="odd:bg-first/20 hover:bg-first/25 transition-all duration-150 cursor-default">
+                      <td className="w-1/4 px-3 py-1.5 text-slate-900 rounded-s-lg">
+                        پراکندگی
+                      </td>
+                      <td className="w-3/4 px-3 py-1.5 text-slate-800 rounded-e-lg">
+                        خوب
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </section>
             </section>
           </div>
-          {/* سایدبار */}
           <div className="w-1/3">
             <div className="sticky top-15 bg-gray-100 rounded-2xl px-2 py-3">
               {/* <section className="flex items-center justify-center gap-3 text-2xl text-first line-through">
@@ -73,7 +193,7 @@ const SingleProduct = () => {
                 />
               </section>
               <section className="px-3 my-5">
-              <div className="flex gap-3 my-3">
+                <div className="flex gap-3 my-3">
                   <FontAwesomeIcon
                     className="text-first w-6 text-lg"
                     icon={faBoxOpen}
