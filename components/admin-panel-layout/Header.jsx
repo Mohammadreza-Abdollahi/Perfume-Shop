@@ -54,12 +54,12 @@ const AdminPanelHeader = () => {
   }, [path]);
   return (
     <>
-      <header className="fixed top-0 md:right-1/12 z-3 mr-auto w-full md:w-11/12 px-5 py-5 bg-back-gray border-b-2 border-pal1-400 shadow-xl">
+      <header className="fixed top-0 md:right-1/12 z-3 mr-auto w-full md:w-11/12 px-5 py-5 bg-gray-100 border-b-2 border-first shadow-xl">
         <div className="flex justify-between items-center">
           <section className="md:hidden">
             <button onClick={toggleMenu}>
               <FontAwesomeIcon
-                className="md:hidden text-2xl text-slate-800 hover:text-yellow-500 transition-all duration-150"
+                className="md:hidden text-2xl text-slate-800 hover:text-first transition-all duration-150"
                 icon={faBars}
               />
             </button>
@@ -76,7 +76,7 @@ const AdminPanelHeader = () => {
                 onClick={() => setDropdown((prev) => !prev)}
               >
                 <FontAwesomeIcon
-                  className="text-2xl text-slate-800 hover:text-yellow-500"
+                  className="text-2xl text-slate-800 hover:text-first"
                   icon={faEllipsisV}
                 />
               </span>
@@ -85,34 +85,34 @@ const AdminPanelHeader = () => {
                   dropdown
                     ? "translate-y-0 opacity-100"
                     : "translate-y-32 opacity-0"
-                } w-36 bg-white border border-pal1-400 rounded transition-all duration-75`}
+                } w-36 bg-white border border-first rounded transition-all duration-75`}
               >
                 <ul>
-                  <li className="px-3 py-1.5 my-1 hover:bg-pal1 group">
+                  <li className="px-3 py-1.5 my-1 hover:bg-first hover:text-white group">
                     <Link href="/" className="flex items-center gap-2">
                       <FontAwesomeIcon
-                        className="text-lg text-slate-800 group-hover:text-yellow-500 transition-all duration-150"
+                        className="text-lg text-slate-800 group-hover:text-white transition-all duration-150"
                         icon={faGear}
                       />
                       تنظیمات
                     </Link>
                   </li>
-                  <li className="px-3 py-1.5 my-1 hover:bg-pal1 group">
+                  <li className="px-3 py-1.5 my-1 hover:bg-first hover:text-white group">
                     <Link href="/" className="flex items-center gap-2">
                       <FontAwesomeIcon
-                        className="text-lg text-slate-800 group-hover:text-yellow-500 transition-all duration-150"
+                        className="text-lg text-slate-800 group-hover:text-white transition-all duration-150"
                         icon={faBell}
                       />
                       پیام ها
                     </Link>
                   </li>
-                  <li className="px-3 py-1.5 my-1 hover:bg-pal1 group">
+                  <li className="px-3 py-1.5 my-1 hover:bg-first hover:text-white group">
                     <div
                       onClick={handleLogout}
                       className="flex items-center gap-2"
                     >
                       <FontAwesomeIcon
-                        className="text-lg text-slate-800 group-hover:text-yellow-500 transition-all duration-150"
+                        className="text-lg text-slate-800 group-hover:text-white transition-all duration-150"
                         icon={faArrowRightFromBracket}
                       />
                       خروج
@@ -125,7 +125,7 @@ const AdminPanelHeader = () => {
               <div className="mx-2 px-2">
                 <Link href="/user">
                   <FontAwesomeIcon
-                    className="text-2xl text-slate-800 hover:text-yellow-500 transition-all duration-150"
+                    className="text-2xl text-slate-800 hover:text-first transition-all duration-150"
                     icon={faHome}
                   />
                 </Link>
@@ -133,7 +133,7 @@ const AdminPanelHeader = () => {
               <div className="mx-2 px-2">
                 <Link href="/">
                   <FontAwesomeIcon
-                    className="text-2xl text-slate-800 hover:text-yellow-500 transition-all duration-150"
+                    className="text-2xl text-slate-800 hover:text-first transition-all duration-150"
                     icon={faGear}
                   />
                 </Link>
@@ -141,7 +141,7 @@ const AdminPanelHeader = () => {
               <div className="mx-2 px-2">
                 <Link href="/">
                   <FontAwesomeIcon
-                    className="text-2xl text-slate-800 hover:text-yellow-500 transition-all duration-150"
+                    className="text-2xl text-slate-800 hover:text-first transition-all duration-150"
                     icon={faBell}
                   />
                 </Link>
@@ -149,7 +149,7 @@ const AdminPanelHeader = () => {
               <div className="mx-2 px-2" onClick={handleLogout}>
                 <Link href="/">
                   <FontAwesomeIcon
-                    className="text-2xl text-slate-800 hover:text-yellow-500 transition-all duration-150"
+                    className="text-2xl text-slate-800 hover:text-first transition-all duration-150"
                     icon={faArrowRightFromBracket}
                   />
                 </Link>
