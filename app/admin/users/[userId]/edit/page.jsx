@@ -1,5 +1,6 @@
 "use client";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 
 const UserInfoPage = () => {
@@ -7,9 +8,7 @@ const UserInfoPage = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [isActive, setIsActive] = useState(true);
-  const handleSave = async () => {
-
-  };
+  
   return (
     <>
       <form className="relative py-10">

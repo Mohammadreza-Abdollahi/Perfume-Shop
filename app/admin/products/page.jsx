@@ -1,6 +1,5 @@
 "use client";
 
-import { convertToPersianDigits } from "@/utilities/convertToPersianDigits";
 import {
   faEdit,
   faNewspaper,
@@ -12,33 +11,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-const getProducts = async () => {
-  const res = await fetch("/api/admin/products", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    credentials: "include",
-  });
-  const data = await res.json();
-  return data;
-};
 const AdminProducts = () => {
-  const [products, setProducts] = useState([]);
-  const [fPrice, setFPrice] = useState("");
-  useEffect(() => {
-    const handleGetProducts = async () => {
-      const data = await getProducts();
-      setProducts(data.products);
-    };
-    handleGetProducts();
-  }, []);
   return (
     <>
       <section>
         <div className="w-full flex justify-end mb-3">
           <Link className="align-middle" href={"/admin/products/add"}>
-            <button className="bg-pal1-400 text-white px-8 py-1 hover:bg-pal3-600 rounded-sm text-lg transition-all duration-150">
+            <button className="bg-first hover:bg-orange-800 cursor-pointer text-white px-8 py-1 hover:bg-pal3-600 rounded-sm text-lg transition-all duration-150">
               افزودن <FontAwesomeIcon className="align-middle" icon={faPlus} />
             </button>
           </Link>
@@ -57,7 +36,7 @@ const AdminProducts = () => {
             </tr>
           </thead>
           <tbody className="text-center text-lg border-2 border-pal1-400">
-            {products.map((item, index) => (
+            {/* {products.map((item, index) => (
               <tr
                 key={index}
                 className="align-middle text-base border border-pal1-200 even:bg-pal1/60 hover:bg-pal1-200/50 transition-all duration-75"
@@ -110,7 +89,7 @@ const AdminProducts = () => {
                   />
                 </td>
               </tr>
-            ))}
+            ))} */}
           </tbody>
         </table>
       </section>

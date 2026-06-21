@@ -5,7 +5,7 @@ const AdminPanelFooter = () => {
         <div className="">
           <span className="text-sm text-white">
             توسعه یافته با ❤️ توسط{" "}
-            <a className="hover:text-first" href="https://github.com/Mohammadreza-Abdollahi" target="_blank">
+            <a className="hover:text-orange-800" href="https://github.com/Mohammadreza-Abdollahi" target="_blank">
               Mohammadreza Abdollahi
             </a>
           </span>
