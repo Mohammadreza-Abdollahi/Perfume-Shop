@@ -1,13 +1,8 @@
-import pool from "@/libs/db";
+import { findById, findByPhone } from "@/services/user.service";
 
 const AdminPage = async () => {
-  try {
-    const [products] = await pool.query("SELECT * FROM users");
-
-    console.log(products);
-  } catch (error) {
-    console.error("MYSQL ERROR:", error);
-  }
+  const user = await findByPhone("9134673387");
+  console.log(user);
 
   return (
     <>
