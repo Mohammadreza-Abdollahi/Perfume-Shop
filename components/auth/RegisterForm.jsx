@@ -1,0 +1,175 @@
+"use client";
+import { validateRegister } from "@/utils/validations/register";
+import {
+  faAddressCard,
+  faCircleExclamation,
+  faKey,
+  faMobileScreenButton,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Image from "next/image";
+import { useState } from "react";
+
+const RegisterForm = () => {
+  const [error, setError] = useState("");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData);
+    const validate = validateRegister(data);
+    setError(validate);
+    if (!validate) {
+      console.log(data);
+    }
+  };
+  return (
+    <>
+      <section className="h-screen flex justify-center">
+        <div className="flex-1/2 flex justify-center items-center relative bg-first/10">
+          <section className="w-1/2 mx-auto">
+            <form onSubmit={handleSubmit}>
+              <div className="mb-6">
+                <h1 className="lalezar text-slate-800 text-4xl text-center mb-3">
+                  ثبت نام
+                </h1>
+                {error ? (
+                  <span
+                    className={`${
+                      error ? "opacity-100" : "opacity-0"
+                    } flex items-center gap-2 text-red-500 text-sm`}
+                  >
+                    <FontAwesomeIcon icon={faCircleExclamation} />
+                    {error}
+                  </span>
+                ) : (
+                  <span className="block text-center text-slate-600 mb-3">
+                    اطلاعات خود را به صورت صحیح وارد کنید و ثبت نام کنید.
+                  </span>
+                )}
+              </div>
+              <div className="relative my-5">
+                <input
+                  className="w-full outline-none border text-lg border-first/30 focus:border-first bg-white rounded-xl py-3.5 pr-36 text-slate-800 transition-all duration-150"
+                  type="text"
+                  name="phone"
+                  id="phone"
+                />
+                <label
+                  className="absolute top-1/2 right-3 flex gap-2.5 items-center -translate-y-1/2 text-slate-600"
+                  htmlFor="phone"
+                >
+                  <FontAwesomeIcon
+                    icon={faMobileScreenButton}
+                    className="w-6 text-first inline-block"
+                  />
+                  <span>شماره همراه:</span>
+                </label>
+              </div>
+              <div className="relative my-5">
+                <input
+                  className="w-full outline-none border text-lg border-first/30 focus:border-first bg-white rounded-xl py-3.5 pr-36 text-slate-800 transition-all duration-150"
+                  type="text"
+                  name="first_name"
+                  id="first_name"
+                />
+                <label
+                  className="absolute top-1/2 right-3 flex gap-2.5 items-center -translate-y-1/2 text-slate-600"
+                  htmlFor="first_name"
+                >
+                  <FontAwesomeIcon
+                    icon={faAddressCard}
+                    className="w-6 text-first inline-block"
+                  />
+                  <span>نام :</span>
+                </label>
+              </div>
+              <div className="relative my-5">
+                <input
+                  className="w-full outline-none border text-lg border-first/30 focus:border-first bg-white rounded-xl py-3.5 pr-36 text-slate-800 transition-all duration-150"
+                  type="text"
+                  name="last_name"
+                  id="last_name"
+                />
+                <label
+                  className="absolute top-1/2 right-3 flex gap-2.5 items-center -translate-y-1/2 text-slate-600"
+                  htmlFor="last_name"
+                >
+                  <FontAwesomeIcon
+                    icon={faAddressCard}
+                    className="w-6 text-first inline-block"
+                  />
+                  <span>نام خانوادگی :</span>
+                </label>
+              </div>
+              <div className="relative my-5">
+                <input
+                  className="w-full outline-none border text-lg border-first/30 focus:border-first bg-white rounded-xl py-3.5 pr-36 text-slate-800 transition-all duration-150"
+                  type="password"
+                  name="password"
+                  id="password"
+                />
+                <label
+                  className="absolute top-1/2 right-3 flex gap-2.5 items-center -translate-y-1/2 text-slate-600"
+                  htmlFor="password"
+                >
+                  <FontAwesomeIcon
+                    icon={faKey}
+                    className="w-6 text-first inline-block"
+                  />
+                  <span>رمز عبور :</span>
+                </label>
+              </div>
+              <div className="relative my-5">
+                <input
+                  className="w-full outline-none border text-lg border-first/30 focus:border-first bg-white rounded-xl py-3.5 pr-36 text-slate-800 transition-all duration-150"
+                  type="password"
+                  name="confirm_password"
+                  id="confirm_password"
+                />
+                <label
+                  className="absolute top-1/2 right-3 flex gap-2.5 items-center -translate-y-1/2 text-slate-600"
+                  htmlFor="confirm_password"
+                >
+                  <FontAwesomeIcon
+                    icon={faKey}
+                    className="w-6 text-first inline-block"
+                  />
+                  <span>تکرار رمز عبور :</span>
+                </label>
+              </div>
+              <div className="flex justify-center items-center">
+                <button
+                  type="submit"
+                  className="px-6 py-3 bg-linear-to-r from-first/65 to-first hover:bg-first disabled:cursor-not-allowed disabled:opacity-60 text-white rounded-2xl cursor-pointer transition-all duration-150"
+                >
+                  ثبت نام
+                </button>
+              </div>
+            </form>
+          </section>
+        </div>
+        <div className="flex-1/2 flex justify-center items-center bg-[url(/images/register_back.svg)] bg-no-repeat bg-cover">
+          <div className="bg-white/30 border border-white backdrop-blur-sm w-1/2 h-2/3 rounded-3xl relative">
+            <Image
+              className="absolute bottom-20 left-1/2 -translate-x-1/2"
+              src={"/images/register_man.png"}
+              alt="Login_Vector"
+              width={380}
+              height={440}
+            />
+            <div className="absolute right-0 bottom-1/3 translate-x-1/2 w-16 h-16 flex justify-center items-center rounded-full bg-white">
+              <Image
+                src={"/icons/thunder.png"}
+                alt="Login_Vector"
+                width={42}
+                height={42}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+};
+
+export default RegisterForm;
