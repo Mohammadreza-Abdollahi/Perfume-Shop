@@ -44,23 +44,23 @@ export const findByPhone = async (phone) => {
 export const create = async (first_name, last_name, phone, password) => {
   const existUser = await findByPhone(phone);
   if (existUser) {
-    throw new Error("این شماره تلفن موجود است!");
+    throw new Error("PHONE_ALREADY_EXISTS");
   }
 
   const hashedPassword = await bcrypt.hash(password, 12);
 
-  const [res] = await pool.query(
+  const [result] = await pool.execute(
     "INSERT INTO users (first_name, last_name, phone, password) VALUES (?, ?, ?, ?)",
     [first_name, last_name, phone, hashedPassword]
   );
-  return {
-    id: result.insertId,
-    first_name,
-    last_name,
-    phone,
-    role: "user",
-  };
+  return await findById(result.insertId);
 };
 export const update = async () => {
+  // None
+};
+export const changePassword = async () => {
+  // None
+};
+export const deleteById = async () => {
   // None
 };

@@ -8,18 +8,37 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
+import { redirect, useRouter } from "next/navigation";
 import { useState } from "react";
 
 const RegisterForm = () => {
+  const router = useRouter();
   const [error, setError] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData);
-    const validate = validateRegister(data);
-    setError(validate);
-    if (!validate) {
-      console.log(data);
+
+    const err = validateRegister(data);
+    if (err) {
+      setError(err);
+      return;
+    }
+    setError(null);
+
+    const res = await fetch("/api/auth/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    const response = await res.json();
+    console.log(response);
+    if (res.ok) {
+      setError(response.message);
+      router.replace("/admin");
     }
   };
   return (
