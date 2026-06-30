@@ -41,6 +41,27 @@ export const findByPhone = async (phone) => {
   );
   return users[0] || null;
 };
+export const findAuthUserByPhone = async (phone) => {
+  const [users] = await pool.execute(
+    `
+          SELECT
+            id,
+            phone,
+            password,
+            email,
+            role,
+            status,
+            first_name,
+            last_name,
+            created_at,
+            updated_at
+          FROM users
+          WHERE phone = ?
+          `,
+    [phone]
+  );
+  return users[0] || null;
+};
 export const create = async (first_name, last_name, phone, password) => {
   const existUser = await findByPhone(phone);
   if (existUser) {

@@ -1,21 +1,46 @@
 "use client";
-import { faKey, faMobileScreenButton } from "@fortawesome/free-solid-svg-icons";
+import { validateLogin } from "@/utils/validations/login";
+import {
+  faCircleExclamation,
+  faKey,
+  faMobileScreenButton,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const LoginForm = () => {
+  const router = useRouter();
   const [error, setError] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData);
-    const validate = validateRegister(data);
-    setError(validate);
-    if (!validate) {
-      console.log(data);
+
+    const err = validateLogin(data);
+    if (err) {
+      setError(err);
+      return;
     }
+    setError(null);
+
+    const res = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    const response = await res.json();
+    if (!res.ok) {
+      setError(response.message);
+      return;
+    }
+    router.replace("/admin");
   };
   return (
     <>
@@ -81,7 +106,7 @@ const LoginForm = () => {
               <div className="my-5 px-2">
                 <span className="text-slate-700">
                   حساب کاربری ندارید؟{" "}
-                  <Link className="text-first" href={"/auth/register"}>
+                  <Link className="text-first mx-2" href={"/auth/register"}>
                     ثبت نام
                   </Link>
                 </span>

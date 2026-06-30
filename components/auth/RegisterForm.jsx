@@ -8,6 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
+import Link from "next/link";
 import { redirect, useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -155,6 +156,14 @@ const RegisterForm = () => {
                   />
                   <span>تکرار رمز عبور :</span>
                 </label>
+              </div>
+              <div className="my-5 px-2">
+                <span className="text-slate-700">
+                  حساب کاربری دارید؟
+                  <Link className="text-first mx-2" href={"/auth/login"}>
+                    ورود
+                  </Link>
+                </span>
               </div>
               <div className="flex justify-center items-center">
                 <button
