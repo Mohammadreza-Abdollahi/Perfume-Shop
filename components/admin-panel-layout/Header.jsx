@@ -123,7 +123,7 @@ const AdminPanelHeader = () => {
             </div>
             <div className="hidden md:flex justify-end">
               <div className="mx-2 px-2">
-                <Link href="/user">
+                <Link href="/">
                   <FontAwesomeIcon
                     className="text-2xl text-slate-800 hover:text-first transition-all duration-150"
                     icon={faHome}
@@ -147,7 +147,7 @@ const AdminPanelHeader = () => {
                 </Link>
               </div>
               <div className="mx-2 px-2" onClick={handleLogout}>
-                <Link href="/">
+                <Link href="/auth/logout">
                   <FontAwesomeIcon
                     className="text-2xl text-slate-800 hover:text-first transition-all duration-150"
                     icon={faArrowRightFromBracket}

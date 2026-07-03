@@ -1,13 +1,13 @@
 import { getCurrentUser } from "@/libs/auth";
 
-const AdminPage = async () => {
+const ProfilePage = async () => {
   const user = await getCurrentUser();
   console.log(user);
   return (
     <>
-      <h1>اینجا پنل ادمین است</h1>
+      <h1>اینجا پنل کاربر است</h1>
     </>
   );
 };
 
-export default AdminPage;
+export default ProfilePage;
