@@ -38,8 +38,8 @@ const AdminPanelHeader = () => {
       case "/products":
         return "محصولات";
         break;
-      case "/articles":
-        return "مقالات";
+      case "/orders":
+        return "سفارشات";
         break;
       case "/tickets":
         return "تیکت ها";
