@@ -76,6 +76,29 @@ export const create = async (name, slug) => {
   );
   return findById(rows.insertId);
 };
+export const update = async (id, name, slug) => {
+  const category = await findById(id);
+  if (!category) {
+    throw new Error("CATEGORY_NOT_FOUND");
+  }
+
+  const slugExists = await findBySlug(slug);
+  if (slugExists && slugExists.id !== Number(id)) {
+    throw new Error("CATEGORY_SLUG_EXISTS");
+  }
+
+  await pool.execute(
+    `
+      UPDATE categories
+      SET
+        name = ?,
+        slug = ?
+      WHERE id = ?
+    `,
+    [name, slug, id]
+  );
+  return await findById(id);
+};
 export const remove = async (id) => {
   const category = await findById(id);
   if (!category) {

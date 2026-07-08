@@ -83,7 +83,7 @@ const CategoryTable = () => {
                   <td className="py-3">{item.created_at}</td>
                   <td className="py-3">{item.updated_at}</td>
                   <td>
-                    <Link href={`/admin/categories/${item._id}/edit`}>
+                    <Link href={`/admin/categories/${item.id}/edit`}>
                       <FontAwesomeIcon
                         icon={faEdit}
                         className="text-xl text-yellow-500 mx-1.5"

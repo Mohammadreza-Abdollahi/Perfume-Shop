@@ -1,9 +1,9 @@
-import CreateCategoryForm from "@/components/admin/categories/CreateCategoryForm";
+import CategoryForm from "@/components/admin/categories/CategoryForm";
 
 const AddCategoryPage = () => {
   return (
     <>
-      <CreateCategoryForm/>
+      <CategoryForm/>
     </>
   );
 };

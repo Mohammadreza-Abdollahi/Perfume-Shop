@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const CreateCategoryForm = () => {
+const CategoryForm = ({ category }) => {
   const router = useRouter();
   const [error, setError] = useState("");
   const handleSubmit = async (e) => {
@@ -21,20 +21,35 @@ const CreateCategoryForm = () => {
       return;
     }
     setError(null);
-
-    const res = await fetch("/api/categories", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    const response = await res.json();
-    if (!res.ok) {
-      setError(response.message);
-      return;
+    if (category) {
+      const res = await fetch(`/api/categories/${category.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const response = await res.json();
+      if (!res.ok) {
+        setError(response.message);
+        return;
+      }
+      router.replace("/admin/categories");
+    } else {
+      const res = await fetch("/api/categories", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const response = await res.json();
+      if (!res.ok) {
+        setError(response.message);
+        return;
+      }
+      router.replace("/admin/categories");
     }
-    router.replace("/admin/categories");
   };
   return (
     <>
@@ -64,6 +79,7 @@ const CreateCategoryForm = () => {
               نام دسته‌بندی
             </label>
             <input
+              defaultValue={category?.name ?? ""}
               id="name"
               name="category_name"
               type="text"
@@ -79,6 +95,7 @@ const CreateCategoryForm = () => {
               اسلاگ
             </label>
             <input
+              defaultValue={category?.slug ?? ""}
               id="slug"
               name="category_slug"
               type="text"
@@ -92,7 +109,7 @@ const CreateCategoryForm = () => {
             type="submit"
             className="block w-full py-3 px-4 bg-first hover:bg-orange-800 text-white rounded-xl cursor-pointer transition-all duration-150"
           >
-            ایجاد دسته بندی
+            {category ? "ویرایش دسته بندی" : "ایجاد دسته بندی"}
           </button>
         </section>
       </form>
@@ -100,4 +117,4 @@ const CreateCategoryForm = () => {
   );
 };
 
-export default CreateCategoryForm;
+export default CategoryForm;
