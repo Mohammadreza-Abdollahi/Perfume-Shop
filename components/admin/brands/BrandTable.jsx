@@ -6,31 +6,31 @@ import { faEdit, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { convertToPersianDigits } from "@/utils/converToPersianDigits";
 
-const CategoryTable = () => {
-  const [categories, setCategories] = useState([]);
-  const loadCategories = async () => {
-    const res = await fetch("/api/categories");
+const BrandTable = () => {
+  const [brands, setBrands] = useState([]);
+  const loadBrands = async () => {
+    const res = await fetch("/api/brands");
 
     const data = await res.json();
 
-    setCategories(data.data);
+    setBrands(data.data);
     console.log(data);
   };
   const handleDelete = async (id) => {
-    const res = await fetch(`/api/categories/${id}`, {
+    const res = await fetch(`/api/brands/${id}`, {
       method: "DELETE",
     });
 
     const data = await res.json();
 
     if (res.ok) {
-      loadCategories();
+      loadBrands();
     }
 
     alert(data.message);
   };
   useEffect(() => {
-    loadCategories();
+    // loadCategories();
   }, []);
   return (
     <>
@@ -50,40 +50,44 @@ const CategoryTable = () => {
               className="w-full rounded-xl border border-gray-300 px-4 py-3 text-slate-800 focus:border-first/50 focus:outline-none"
             />
           </div>
-          <Link className="flex-2/12" href={"/admin/categories/create"}>
+          <Link className="flex-2/12" href={"/admin/brands/create"}>
             <button className="w-full bg-first hover:bg-orange-800 cursor-pointer text-white px-4 py-3 hover:bg-pal3-600 rounded-sm transition-all duration-150">
               افزودن <FontAwesomeIcon className="align-middle" icon={faPlus} />
             </button>
           </Link>
         </div>
-        {categories.length > 0 ? (
+        {brands.length > 0 ? (
           <table className="w-full">
             <thead className="text-center">
               <tr className="border-b-2 border-pal1-500 pb-5">
                 <th className="w-1/12 pb-4">#</th>
-                <th className="w-4/12 pb-4">عنوان دسته بندی</th>
-                <th className="w-2/12 pb-4">اسلاگ</th>
+                <th className="w-4/12 pb-4">لوگو</th>
+                <th className="w-4/12 pb-4">عنوان برند</th>
+                <th className="w-2/12 pb-4">کشور</th>
                 <th className="w-2/12 pb-4">تاریخ ایجاد</th>
                 <th className="w-2/12 pb-4">تاریخ ویرایش</th>
+                <th className="w-1/12 pb-4">وضعیت</th>
                 <th className="w-1/12 pb-4">عملیات</th>
               </tr>
             </thead>
             <tbody className="text-center text-lg">
-              {categories.map((item, index) => (
+              {brands.map((item, index) => (
                 <tr
                   key={index}
                   className="align-middle text-base border-b-2 border-first/50 even:bg-first/10 hover:bg-first/15 transition-all duration-75"
                 >
                   <td className="py-3">{convertToPersianDigits(index + 1)}</td>
+                  <td className="py-3">{convertToPersianDigits(index + 1)}</td>
 
                   <td className="py-3">
                     <span className="line-clamp-1">{item.name}</span>
                   </td>
-                  <td className="py-3">{item.slug}</td>
+                  <td className="py-3">{item.country}</td>
                   <td className="py-3">{item.created_at}</td>
                   <td className="py-3">{item.updated_at}</td>
+                  <td className="py-3">{item.is_active}</td>
                   <td>
-                    <Link href={`/admin/categories/${item.id}/edit`}>
+                    <Link href={`/admin/brands/${item.id}/edit`}>
                       <FontAwesomeIcon
                         icon={faEdit}
                         className="text-xl text-yellow-500 mx-1.5"
@@ -101,7 +105,7 @@ const CategoryTable = () => {
           </table>
         ) : (
           <span className="block py-3 text-center bg-red-100 text-red-800 rounded-lg">
-            هیچ دسته بندی وجود ندارد!
+            هیچ برندی وجود ندارد!
           </span>
         )}
       </section>
@@ -109,4 +113,4 @@ const CategoryTable = () => {
   );
 };
 
-export default CategoryTable;
+export default BrandTable;
