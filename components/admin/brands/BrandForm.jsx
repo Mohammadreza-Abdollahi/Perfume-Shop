@@ -1,6 +1,6 @@
 "use client";
 
-import { validateCategory } from "@/utils/validations/category";
+import { validateBrand } from "@/utils/validations/brand";
 import { faCircleExclamation } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
@@ -15,7 +15,7 @@ const BrandForm = ({ brand }) => {
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData);
 
-    const err = validateCategory(data);
+    const err = validateBrand(data);
     if (err) {
       setError(err);
       return;
@@ -38,10 +38,7 @@ const BrandForm = ({ brand }) => {
     } else {
       const res = await fetch("/api/brands", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
+        body: formData,
       });
       const response = await res.json();
       if (!res.ok) {
@@ -73,14 +70,15 @@ const BrandForm = ({ brand }) => {
         <section className="flex gap-10">
           <div className="relative w-full">
             <label
-              htmlFor="name"
+              htmlFor="brand_name"
               className="absolute right-4 -top-2.5 bg-white px-1 text-sm font-medium text-gray-500"
             >
               نام برند
             </label>
             <input
-              id="name"
-              name="category_name"
+              defaultValue={brand?.name ?? ""}
+              id="brand_name"
+              name="brand_name"
               type="text"
               placeholder="برای مثال Chanel"
               className="w-full rounded-xl border border-gray-300 px-4 py-3 text-slate-800 focus:border-first/50 focus:outline-none"
@@ -88,18 +86,86 @@ const BrandForm = ({ brand }) => {
           </div>
           <div className="relative w-full">
             <label
-              htmlFor="slug"
+              htmlFor="brand_slug"
               className="absolute right-4 -top-2.5 bg-white px-1 text-sm font-medium text-gray-500"
             >
               اسلاگ
             </label>
             <input
-              id="slug"
-              name="category_slug"
+              defaultValue={brand?.slug ?? ""}
+              id="brand_slug"
+              name="brand_slug"
               type="text"
-              placeholder="برای مثال mens"
+              placeholder="برای مثال chanel"
               className="w-full rounded-xl border border-gray-300 px-4 py-3 text-slate-800 focus:border-first/50 focus:outline-none"
             />
+          </div>
+        </section>
+        <section className="flex gap-10 my-10">
+          <div className="relative w-full">
+            <label
+              htmlFor="brand_country"
+              className="absolute right-4 -top-2.5 bg-white px-1 text-sm font-medium text-gray-500"
+            >
+              کشور
+            </label>
+            <input
+              defaultValue={brand?.country ?? ""}
+              id="brand_country"
+              name="brand_country"
+              type="text"
+              placeholder="برای مثال ایتالیا"
+              className="w-full rounded-xl border border-gray-300 px-4 py-3 text-slate-800 focus:border-first/50 focus:outline-none"
+            />
+          </div>
+          <div className="relative w-full">
+            <label
+              htmlFor="brand_logo"
+              className="absolute right-4 -top-2.5 bg-white px-1 text-sm font-medium text-gray-500"
+            >
+              تصویر
+            </label>
+            <input
+              accept="image/png,image/jpeg,image/webp"
+              id="brand_logo"
+              name="brand_logo"
+              type="file"
+              className="w-full rounded-xl border border-gray-300 px-4 py-3 text-slate-800 focus:border-first/50 focus:outline-none"
+            />
+          </div>
+        </section>
+        <section className="flex gap-10 my-10">
+          <div className="relative w-full">
+            <label
+              htmlFor="brand_description"
+              className="absolute right-4 -top-2.5 bg-white px-1 text-sm font-medium text-gray-500"
+            >
+              توضیحات
+            </label>
+            <textarea
+              defaultValue={brand?.description ?? ""}
+              rows={4}
+              name="brand_description"
+              id="brand_description"
+              placeholder="توضیحات برند..."
+              className="w-full rounded-xl border border-gray-300 px-4 py-3 text-slate-800 focus:border-first/50 focus:outline-none"
+            ></textarea>
+          </div>
+        </section>
+        <section className="my-10">
+          <div className="w-full flex items-center gap-2">
+            <input
+              id="brand_active"
+              name="brand_active"
+              type="checkbox"
+              className="w-5 h-5 accent-first"
+            />
+            <label
+              htmlFor="brand_active"
+              className="text-slate-700 select-none"
+            >
+              پس از افزودن برند به حالت فعال در آید.
+            </label>
           </div>
         </section>
         <section className="mt-5">
