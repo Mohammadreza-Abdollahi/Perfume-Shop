@@ -1,9 +1,39 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { NextResponse } from "next/server";
-import { create } from "@/services/brand.service";
+import { create, findAll } from "@/services/brand.service";
 import { validateBrand } from "@/utils/validations/brand";
 
+export const GET = async (request, { params }) => {
+  try {
+    const { searchParams } = new URL(request.url);
+
+    const page = Number(searchParams.get("page")) || 1;
+    const limit = Number(searchParams.get("limit")) || 10;
+    const search = searchParams.get("search") || "";
+    const sort = searchParams.get("sort") || "id";
+    const order = searchParams.get("order") || "DESC";
+
+    const result = await findAll({
+      page,
+      limit,
+      search,
+      sort,
+      order,
+    });
+    return NextResponse.json(result);
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json(
+      {
+        message: "خطای داخلی سرور",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
+};
 export const POST = async (request) => {
   let image_url = null;
   try {

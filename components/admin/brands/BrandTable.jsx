@@ -2,35 +2,34 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { faEdit, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faEdit, faNewspaper, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { convertToPersianDigits } from "@/utils/converToPersianDigits";
+import Image from "next/image";
 
 const BrandTable = () => {
   const [brands, setBrands] = useState([]);
+
   const loadBrands = async () => {
     const res = await fetch("/api/brands");
-
     const data = await res.json();
-
     setBrands(data.data);
     console.log(data);
   };
+
   const handleDelete = async (id) => {
     const res = await fetch(`/api/brands/${id}`, {
       method: "DELETE",
     });
-
     const data = await res.json();
-
     if (res.ok) {
       loadBrands();
     }
-
     alert(data.message);
   };
+
   useEffect(() => {
-    // loadCategories();
+    loadBrands();
   }, []);
   return (
     <>
@@ -56,18 +55,18 @@ const BrandTable = () => {
             </button>
           </Link>
         </div>
-        {brands.length > 0 ? (
+        {brands?.length > 0 ? (
           <table className="w-full">
             <thead className="text-center">
               <tr className="border-b-2 border-pal1-500 pb-5">
                 <th className="w-1/12 pb-4">#</th>
-                <th className="w-4/12 pb-4">لوگو</th>
-                <th className="w-4/12 pb-4">عنوان برند</th>
-                <th className="w-2/12 pb-4">کشور</th>
+                <th className="w-1/12 pb-4">لوگو</th>
+                <th className="w-2/12 pb-4">عنوان برند</th>
+                <th className="w-1/12 pb-4">کشور</th>
                 <th className="w-2/12 pb-4">تاریخ ایجاد</th>
                 <th className="w-2/12 pb-4">تاریخ ویرایش</th>
                 <th className="w-1/12 pb-4">وضعیت</th>
-                <th className="w-1/12 pb-4">عملیات</th>
+                <th className="w-3/12 pb-4">عملیات</th>
               </tr>
             </thead>
             <tbody className="text-center text-lg">
@@ -77,16 +76,35 @@ const BrandTable = () => {
                   className="align-middle text-base border-b-2 border-first/50 even:bg-first/10 hover:bg-first/15 transition-all duration-75"
                 >
                   <td className="py-3">{convertToPersianDigits(index + 1)}</td>
-                  <td className="py-3">{convertToPersianDigits(index + 1)}</td>
-
+                  <td className="py-3">
+                    <Image
+                      className="mx-auto"
+                      src={item.logo_url || "/images/def_image.png"}
+                      alt={`${item.name}_Logo`}
+                      width={80}
+                      height={80}
+                    />
+                  </td>
                   <td className="py-3">
                     <span className="line-clamp-1">{item.name}</span>
                   </td>
                   <td className="py-3">{item.country}</td>
                   <td className="py-3">{item.created_at}</td>
                   <td className="py-3">{item.updated_at}</td>
-                  <td className="py-3">{item.is_active}</td>
+                  <td
+                    className={`py-3 ${
+                      item.is_active ? "bg-green-300" : "bg-red-300"
+                    }`}
+                  >
+                    {item.is_active ? "فعال" : "غیر فعال"}
+                  </td>
                   <td>
+                    <Link href={`/admin/brands/${item.id}/edit`}>
+                      <FontAwesomeIcon
+                        icon={faNewspaper}
+                        className="text-xl text-blue-500 mx-1.5"
+                      />
+                    </Link>
                     <Link href={`/admin/brands/${item.id}/edit`}>
                       <FontAwesomeIcon
                         icon={faEdit}

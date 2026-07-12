@@ -16,12 +16,8 @@ export const findAll = async ({
   const [rows] = await pool.execute(
     `
         SELECT
-            id,
-            name,
-            slug,
-            created_at,
-            updated_at
-        FROM categories
+        id, name, slug, country, description, is_active, logo_url, created_at, updated_at
+        FROM brands
         WHERE name LIKE ?
         ORDER BY ${sortColumn} ${sortOrder}
         LIMIT ${Number(limit)}
@@ -33,7 +29,7 @@ export const findAll = async ({
   const [count] = await pool.execute(
     `
         SELECT COUNT(*) AS total
-        FROM categories
+        FROM brands
         WHERE name LIKE ?
         `,
     [keyword]
@@ -50,7 +46,7 @@ export const findAll = async ({
     },
   };
 };
-export const findById = async (id) => { 
+export const findById = async (id) => {
   const [rows] = await pool.execute(
     "SELECT id, name, slug, country, description, is_active, logo_url, created_at, updated_at FROM brands WHERE id = ?",
     [id]
