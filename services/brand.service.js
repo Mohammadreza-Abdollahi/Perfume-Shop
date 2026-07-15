@@ -1,4 +1,6 @@
 import pool from "@/libs/db";
+import path from "path";
+import { promises as fs } from "fs";
 
 export const findAll = async ({
   page = 1,
@@ -79,34 +81,47 @@ export const create = async (
   );
   return findById(rows.insertId);
 };
-export const update = async (id, name, slug) => {
-  const category = await findById(id);
-  if (!category) {
-    throw new Error("CATEGORY_NOT_FOUND");
-  }
+// export const update = async (id, name, slug) => {
+//   const category = await findById(id);
+//   if (!category) {
+//     throw new Error("CATEGORY_NOT_FOUND");
+//   }
 
-  const slugExists = await findBySlug(slug);
-  if (slugExists && slugExists.id !== Number(id)) {
-    throw new Error("CATEGORY_SLUG_EXISTS");
-  }
+//   const slugExists = await findBySlug(slug);
+//   if (slugExists && slugExists.id !== Number(id)) {
+//     throw new Error("CATEGORY_SLUG_EXISTS");
+//   }
 
-  await pool.execute(
-    `
-      UPDATE categories
-      SET
-        name = ?,
-        slug = ?
-      WHERE id = ?
-    `,
-    [name, slug, id]
-  );
-  return await findById(id);
-};
+//   await pool.execute(
+//     `
+//       UPDATE categories
+//       SET
+//         name = ?,
+//         slug = ?
+//       WHERE id = ?
+//     `,
+//     [name, slug, id]
+//   );
+//   return await findById(id);
+// };
 export const remove = async (id) => {
-  const category = await findById(id);
-  if (!category) {
-    throw new Error("CATEGORY_NOT_FOUND");
+  const [rows] = await pool.execute(
+    "SELECT logo_url FROM brands WHERE id = ?",
+    [id]
+  );
+  const brand = rows[0];
+  if (!brand) {
+    throw new Error("BRAND_NOT_FOUND");
   }
-  await pool.execute("DELETE FROM categories WHERE id = ?", [id]);
+
+  if (brand.logo_url) {
+    const filePath = path.join(process.cwd(), "public", brand.logo_url);
+    try {
+      await fs.unlink(filePath);
+    } catch (err) {
+      console.warn("Brand image not found:", filePath);
+    }
+  }
+  await pool.execute("DELETE FROM brands WHERE id = ?", [id]);
   return true;
 };

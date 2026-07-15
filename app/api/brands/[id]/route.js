@@ -1,45 +1,8 @@
-import { remove, update } from "@/services/category.service";
+import { remove } from "@/services/brand.service";
+import { update } from "@/services/category.service";
 import { validateCategory } from "@/utils/validations/category";
 import { NextResponse } from "next/server";
 
-export const DELETE = async (request, { params }) => {
-  try {
-    const { id } = await params;
-
-    await remove(id);
-
-    return NextResponse.json(
-      {
-        message: "دسته بندی با موفقیت حذف شد.",
-      },
-      {
-        status: 200,
-      }
-    );
-  } catch (err) {
-    if (err.message === "CATEGORY_NOT_FOUND") {
-      return NextResponse.json(
-        {
-          message: "دسته بندی پیدا نشد.",
-        },
-        {
-          status: 404,
-        }
-      );
-    }
-
-    console.error(err);
-
-    return NextResponse.json(
-      {
-        message: "خطای داخلی سرور",
-      },
-      {
-        status: 500,
-      }
-    );
-  }
-};
 export const PUT = async (request, { params }) => {
   try {
     const { id } = await params;
@@ -84,6 +47,41 @@ export const PUT = async (request, { params }) => {
 
     console.error(err);
 
+    return NextResponse.json(
+      {
+        message: "خطای داخلی سرور",
+      },
+      {
+        status: 500,
+      }
+    );
+  }
+};
+export const DELETE = async (request, { params }) => {
+  try {
+    const { id } = await params;
+    await remove(id);
+
+    return NextResponse.json(
+      {
+        message: "برند با موفقیت حذف شد.",
+      },
+      {
+        status: 200,
+      }
+    );
+  } catch (err) {
+    if (err.message === "BRAND_NOT_FOUND") {
+      return NextResponse.json(
+        {
+          message: "برند یافت نشد.",
+        },
+        {
+          status: 404,
+        }
+      );
+    }
+    console.error(err);
     return NextResponse.json(
       {
         message: "خطای داخلی سرور",

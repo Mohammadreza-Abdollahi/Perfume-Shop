@@ -38,9 +38,6 @@ export const validateBrand = (data) => {
   if (!descriptionRegex.test(brand_description)) {
     return "توضیحات باید هاوی حروف فارسی و انگلیسی و زیر 1000 کاراکتر باشد!";
   }
-  if (!brand_active) {
-    return ".وضعیت برند الزامی است.";
-  }
   if (!isActiveRegex.test(is_active)) {
     return "وضعیت برند نامعتبر است";
   }
