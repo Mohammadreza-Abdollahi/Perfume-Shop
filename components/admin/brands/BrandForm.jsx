@@ -24,10 +24,7 @@ const BrandForm = ({ brand }) => {
     if (brand) {
       const res = await fetch(`/api/brands/${brand.id}`, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
+        body: formData,
       });
       const response = await res.json();
       if (!res.ok) {
@@ -155,6 +152,7 @@ const BrandForm = ({ brand }) => {
         <section className="my-10">
           <div className="w-full flex items-center gap-2">
             <input
+              defaultChecked={brand?.is_active === 1 ? true : false ?? ""}
               id="brand_active"
               name="brand_active"
               type="checkbox"

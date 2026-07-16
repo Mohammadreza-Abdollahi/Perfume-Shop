@@ -81,29 +81,57 @@ export const create = async (
   );
   return findById(rows.insertId);
 };
-// export const update = async (id, name, slug) => {
-//   const category = await findById(id);
-//   if (!category) {
-//     throw new Error("CATEGORY_NOT_FOUND");
-//   }
+export const update = async (
+  id,
+  name,
+  slug,
+  country,
+  description,
+  is_active,
+  newLogoUrl = null
+) => {
+  const brand = await findById(id);
+  if (!brand) {
+    throw new Error("BRAND_NOT_FOUND");
+  }
 
-//   const slugExists = await findBySlug(slug);
-//   if (slugExists && slugExists.id !== Number(id)) {
-//     throw new Error("CATEGORY_SLUG_EXISTS");
-//   }
+  const slugExists = await findBySlug(slug);
+  if (slugExists && slugExists.id !== Number(id)) {
+    throw new Error("BRAND_SLUG_EXISTS");
+  }
+  let logo_url = brand.logo_url;
+  if (newLogoUrl) {
+    if (brand.logo_url) {
+      try {
+        const oldImagePath = path.join(process.cwd(), "public", brand.logo_url);
 
-//   await pool.execute(
-//     `
-//       UPDATE categories
-//       SET
-//         name = ?,
-//         slug = ?
-//       WHERE id = ?
-//     `,
-//     [name, slug, id]
-//   );
-//   return await findById(id);
-// };
+        await fs.unlink(oldImagePath);
+      } catch (err) {
+        if (err.code !== "ENOENT") {
+          throw err;
+        }
+      }
+    }
+
+    logo_url = newLogoUrl;
+  }
+
+  await pool.execute(
+    `
+      UPDATE brands
+      SET
+        name = ?,
+        slug = ?,
+        country = ?,
+        description = ?,
+        logo_url = ?,
+        is_active = ?
+      WHERE id = ?
+    `,
+    [name, slug, country, description, logo_url, is_active, id]
+  );
+  return await findById(id);
+};
 export const remove = async (id) => {
   const [rows] = await pool.execute(
     "SELECT logo_url FROM brands WHERE id = ?",
