@@ -7,6 +7,7 @@ import {
   faClipboardCheck,
   faGaugeHigh,
   faLayerGroup,
+  faTableList,
   faUser,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
@@ -18,9 +19,10 @@ const adminMenu = [
   { id: 1, title: "داشبورد", path: "/admin", icon: faGaugeHigh },
   { id: 2, title: "دسته بندی ها", path: "/admin/categories", icon: faLayerGroup },
   { id: 3, title: "برند ها", path: "/admin/brands", icon: faCertificate },
-  { id: 4, title: "محصولات", path: "/admin/products", icon: faBoxesStacked },
-  { id: 5, title: "سفارشات", path: "/admin/orders", icon: faClipboardCheck },
-  { id: 6, title: "کاربران", path: "/admin/users", icon: faUser },
+  { id: 4, title: "مدیریت ویژگی ها", path: "/admin/attributes", icon: faTableList },
+  { id: 5, title: "محصولات", path: "/admin/products", icon: faBoxesStacked },
+  { id: 6, title: "سفارشات", path: "/admin/orders", icon: faClipboardCheck },
+  { id: 7, title: "کاربران", path: "/admin/users", icon: faUser },
 ];
 const AdminPanelAside = () => {
   const { isOpen, closeMenu } = useMobileAside();
