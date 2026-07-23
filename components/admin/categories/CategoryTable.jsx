@@ -61,10 +61,11 @@ const CategoryTable = () => {
             <thead className="text-center">
               <tr className="border-b-2 border-pal1-500 pb-5">
                 <th className="w-1/12 pb-4">#</th>
-                <th className="w-4/12 pb-4">عنوان دسته بندی</th>
+                <th className="w-3/12 pb-4">عنوان دسته بندی</th>
                 <th className="w-2/12 pb-4">اسلاگ</th>
                 <th className="w-2/12 pb-4">تاریخ ایجاد</th>
                 <th className="w-2/12 pb-4">تاریخ ویرایش</th>
+                <th className="w-1/12 pb-4">وضعیت</th>
                 <th className="w-1/12 pb-4">عملیات</th>
               </tr>
             </thead>
@@ -82,6 +83,13 @@ const CategoryTable = () => {
                   <td className="py-3">{item.slug}</td>
                   <td className="py-3">{item.created_at}</td>
                   <td className="py-3">{item.updated_at}</td>
+                  <td
+                    className={`py-3 ${
+                      item.is_active ? "bg-green-200" : "bg-red-200"
+                    }`}
+                  >
+                    {item.is_active ? "فعال" : "غیر فعال"}
+                  </td>
                   <td>
                     <Link href={`/admin/categories/${item.id}/edit`}>
                       <FontAwesomeIcon

@@ -19,10 +19,9 @@ export const findAll = async ({
             id,
             name,
             slug,
-            is_active,
             created_at,
             updated_at
-        FROM categories
+        FROM product_attributes
         WHERE name LIKE ?
         ORDER BY ${sortColumn} ${sortOrder}
         LIMIT ${Number(limit)}
@@ -34,7 +33,7 @@ export const findAll = async ({
   const [count] = await pool.execute(
     `
         SELECT COUNT(*) AS total
-        FROM categories
+        FROM product_attributes
         WHERE name LIKE ?
         `,
     [keyword]
@@ -53,64 +52,58 @@ export const findAll = async ({
 };
 export const findById = async (id) => {
   const [rows] = await pool.execute(
-    "SELECT id, name, slug, is_active, created_at, updated_at FROM categories WHERE id = ?",
+    "SELECT id, name, slug, created_at, updated_at FROM product_attributes WHERE id = ?",
     [id]
   );
   return rows[0];
 };
 export const findBySlug = async (slug) => {
   const [rows] = await pool.execute(
-    "SELECT id, name, slug, is_active, created_at, updated_at FROM categories WHERE slug = ?",
+    "SELECT id, name, slug, created_at, updated_at FROM product_attributes WHERE slug = ?",
     [slug]
   );
 
   return rows[0];
 };
-export const create = async (name, slug, is_active) => {
-  const category = await findBySlug(slug);
-  if (category) {
-    throw new Error("CATEGORY_ALREADY_EXISTS");
+export const create = async (name, slug) => {
+  const attribute = await findBySlug(slug);
+  if (attribute) {
+    throw new Error("ATTRIBUTE_ALREADY_EXISTS");
   }
   const [rows] = await pool.execute(
-    "INSERT INTO categories (name , slug, is_active) VALUES (?, ?, ?)",
-    [name, slug, is_active]
+    "INSERT INTO product_attributes (name , slug) VALUES (?, ?)",
+    [name, slug]
   );
   return findById(rows.insertId);
 };
-export const update = async (id, name, slug, is_active) => {
-  const category = await findById(id);
-  if (!category) {
-    throw new Error("CATEGORY_NOT_FOUND");
+export const update = async (id, name, slug) => {
+  const attribute = await findById(id);
+  if (!attribute) {
+    throw new Error("ATTRIBUTE_NOT_FOUND");
   }
 
   const slugExists = await findBySlug(slug);
   if (slugExists && slugExists.id !== Number(id)) {
-    throw new Error("CATEGORY_SLUG_EXISTS");
+    throw new Error("ATTRIBUTE_SLUG_EXISTS");
   }
-  console.log({
-    id,
-    name,
-    slug,
-    is_active,
-  });
+
   await pool.execute(
     `
-      UPDATE categories
+      UPDATE product_attributes
       SET
         name = ?,
-        slug = ?,
-        is_active = ?
+        slug = ?
       WHERE id = ?
     `,
-    [name, slug, is_active, id]
+    [name, slug, id]
   );
   return await findById(id);
 };
 export const remove = async (id) => {
   const category = await findById(id);
   if (!category) {
-    throw new Error("CATEGORY_NOT_FOUND");
+    throw new Error("ATTRIBUTE_NOT_FOUND");
   }
-  await pool.execute("DELETE FROM categories WHERE id = ?", [id]);
+  await pool.execute("DELETE FROM product_attributes WHERE id = ?", [id]);
   return true;
 };

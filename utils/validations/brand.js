@@ -1,12 +1,10 @@
-export const validateBrand = (data) => {
-  const {
-    brand_name,
-    brand_slug,
-    brand_country,
-    brand_description,
-    brand_active,
-  } = data;
-
+export const validateBrand = ({
+  brand_name,
+  brand_slug,
+  brand_country,
+  brand_description,
+  brand_active,
+}) => {
   const is_active = brand_active === "on" ? 1 : 0;
 
   const nameRegex = /^[A-Za-zآ-ی\s]{2,150}$/;

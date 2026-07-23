@@ -15,6 +15,8 @@ const CategoryForm = ({ category }) => {
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData);
 
+    data.category_active = data.category_active === "on" ? 1 : 0;
+    
     const err = validateCategory(data);
     if (err) {
       setError(err);
@@ -102,6 +104,23 @@ const CategoryForm = ({ category }) => {
               placeholder="برای مثال mens"
               className="w-full rounded-xl border border-gray-300 px-4 py-3 text-slate-800 focus:border-first/50 focus:outline-none"
             />
+          </div>
+        </section>
+        <section className="my-10">
+          <div className="w-full flex items-center gap-2">
+            <input
+              defaultChecked={category?.is_active === 1 ? true : false ?? ""}
+              id="category_active"
+              name="category_active"
+              type="checkbox"
+              className="w-5 h-5 accent-first"
+            />
+            <label
+              htmlFor="category_active"
+              className="text-slate-700 select-none"
+            >
+              پس از افزودن دسته بندی به حالت فعال در آید.
+            </label>
           </div>
         </section>
         <section className="mt-5">

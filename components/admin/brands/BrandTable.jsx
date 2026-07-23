@@ -93,7 +93,7 @@ const BrandTable = () => {
                   <td className="py-3">{item.updated_at}</td>
                   <td
                     className={`py-3 ${
-                      item.is_active ? "bg-green-300" : "bg-red-300"
+                      item.is_active ? "bg-green-200" : "bg-red-200"
                     }`}
                   >
                     {item.is_active ? "فعال" : "غیر فعال"}

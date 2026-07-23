@@ -1,5 +1,5 @@
 import AttributeForm from "@/components/admin/attributes/AttributeForm";
-import { findById } from "@/services/category.service";
+import { findById } from "@/services/attribute.service";
 import { notFound } from "next/navigation";
 
 const AttributeEdit = async ({ params }) => {

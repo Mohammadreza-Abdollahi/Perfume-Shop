@@ -22,7 +22,7 @@ const AttributeForm = ({ attribute }) => {
     }
     setError(null);
     if (attribute) {
-      const res = await fetch(`/api/attributes/${category.id}`, {
+      const res = await fetch(`/api/attributes/${attribute.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -76,14 +76,14 @@ const AttributeForm = ({ attribute }) => {
               htmlFor="name"
               className="absolute right-4 -top-2.5 bg-white px-1 text-sm font-medium text-gray-500"
             >
-              نام دسته‌بندی
+              نام ویژگی
             </label>
             <input
-              defaultValue={category?.name ?? ""}
+              defaultValue={attribute?.name ?? ""}
               id="name"
-              name="category_name"
+              name="attribute_name"
               type="text"
-              placeholder="برای مثال مردانه"
+              placeholder="برای مثال فصل"
               className="w-full rounded-xl border border-gray-300 px-4 py-3 text-slate-800 focus:border-first/50 focus:outline-none"
             />
           </div>
@@ -95,11 +95,11 @@ const AttributeForm = ({ attribute }) => {
               اسلاگ
             </label>
             <input
-              defaultValue={category?.slug ?? ""}
+              defaultValue={attribute?.slug ?? ""}
               id="slug"
-              name="category_slug"
+              name="attribute_slug"
               type="text"
-              placeholder="برای مثال mens"
+              placeholder="برای مثال season"
               className="w-full rounded-xl border border-gray-300 px-4 py-3 text-slate-800 focus:border-first/50 focus:outline-none"
             />
           </div>
@@ -109,7 +109,7 @@ const AttributeForm = ({ attribute }) => {
             type="submit"
             className="block w-full py-3 px-4 bg-first hover:bg-orange-800 text-white rounded-xl cursor-pointer transition-all duration-150"
           >
-            {category ? "ویرایش دسته بندی" : "ایجاد دسته بندی"}
+            {attribute ? "ویرایش ویژگی" : "ایجاد ویژگی"}
           </button>
         </section>
       </form>

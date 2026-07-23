@@ -8,13 +8,13 @@ import { convertToPersianDigits } from "@/utils/converToPersianDigits";
 
 const AttributeTable = () => {
   const [attributes, setAttributes] = useState([]);
-  // const loadAttributes = async () => {
-  //   const res = await fetch("/api/attributes");
-  //   const data = await res.json();
+  const loadAttributes = async () => {
+    const res = await fetch("/api/attributes");
+    const data = await res.json();
 
-  //   setAttributes(data.data);
-  //   console.log(data);
-  // };
+    setAttributes(data.data);
+    console.log(data);
+  };
   const handleDelete = async (id) => {
     const res = await fetch(`/api/attributes/${id}`, {
       method: "DELETE",
@@ -26,7 +26,7 @@ const AttributeTable = () => {
     alert(data.message);
   };
   useEffect(() => {
-    // loadAttributes();
+    loadAttributes();
   }, []);
   return (
     <>
@@ -46,7 +46,7 @@ const AttributeTable = () => {
               className="w-full rounded-xl border border-gray-300 px-4 py-3 text-slate-800 focus:border-first/50 focus:outline-none"
             />
           </div>
-          <Link className="flex-2/12" href={"/admin/categories/create"}>
+          <Link className="flex-2/12" href={"/admin/attributes/create"}>
             <button className="w-full bg-first hover:bg-orange-800 cursor-pointer text-white px-4 py-3 hover:bg-pal3-600 rounded-sm transition-all duration-150">
               افزودن <FontAwesomeIcon className="align-middle" icon={faPlus} />
             </button>
@@ -57,7 +57,7 @@ const AttributeTable = () => {
             <thead className="text-center">
               <tr className="border-b-2 border-pal1-500 pb-5">
                 <th className="w-1/12 pb-4">#</th>
-                <th className="w-4/12 pb-4">عنوان دسته بندی</th>
+                <th className="w-4/12 pb-4">عنوان ویژگی</th>
                 <th className="w-2/12 pb-4">اسلاگ</th>
                 <th className="w-2/12 pb-4">تاریخ ایجاد</th>
                 <th className="w-2/12 pb-4">تاریخ ویرایش</th>
@@ -79,7 +79,7 @@ const AttributeTable = () => {
                   <td className="py-3">{item.created_at}</td>
                   <td className="py-3">{item.updated_at}</td>
                   <td>
-                    <Link href={`/admin/categories/${item.id}/edit`}>
+                    <Link href={`/admin/attributes/${item.id}/edit`}>
                       <FontAwesomeIcon
                         icon={faEdit}
                         className="text-xl text-yellow-500 mx-1.5"
@@ -97,7 +97,7 @@ const AttributeTable = () => {
           </table>
         ) : (
           <span className="block py-3 text-center bg-red-100 text-red-800 rounded-lg">
-            هیچ دسته بندی وجود ندارد!
+            هیچ ویژگی وجود ندارد!
           </span>
         )}
       </section>

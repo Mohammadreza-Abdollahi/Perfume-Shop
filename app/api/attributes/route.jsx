@@ -1,5 +1,5 @@
-import { create, findAll } from "@/services/category.service";
-import { validateCategory } from "@/utils/validations/category";
+import { create, findAll } from "@/services/attribute.service";
+import { validateAttribute } from "@/utils/validations/attribute";
 import { NextResponse } from "next/server";
 
 export const GET = async (request) => {
@@ -35,19 +35,19 @@ export const GET = async (request) => {
 export const POST = async (request) => {
   try {
     const body = await request.json();
-    const error = validateCategory(body);
+    const error = validateAttribute(body);
     if (error) {
       return NextResponse.json({ message: error }, { status: 400 });
     }
-    const category = await create(body.category_name, body.category_slug, body.category_active);
+    const attribute = await create(body.attribute_name, body.attribute_slug);
     return NextResponse.json(
-      { message: "دسته بندی با موفقیت ایجاد شد.", category },
+      { message: "ویژگی با موفقیت ایجاد شد.", attribute },
       { status: 201 }
     );
   } catch (err) {
-    if (err.message === "CATEGORY_ALREADY_EXISTS") {
+    if (err.message === "ATTRIBUTE_ALREADY_EXISTS") {
       return NextResponse.json(
-        { message: "این دسته بندی قبلا ایجاد شده است!" },
+        { message: "این ویژگی قبلا ایجاد شده است!" },
         { status: 409 }
       );
     }
